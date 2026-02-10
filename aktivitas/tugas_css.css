@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+p {
+    text-align: justify;
+}
+
+.judul-wrapper {
+    text-align: center;
+}
+
+h1 {
+    display: inline-block;
+    background-color: cyan;
+    padding: 5px 10px;
+    font-size: 18px;
+    margin: 0;
+}
+
+.pembukaan-wrapper {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.pembukaan {
+    display: inline-block;
+    background-color: blue;
+    color: white;
+    padding: 3px 10px;
+    font-weight: bold;
+}
+
+.p1 {
+    border: 2px solid red;
+}
+
+p::first-line {
+    background-color: #00cc00;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.italic-underline {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.blue-bold {
+    color: blue;
+    font-weight: bold;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.link:hover {
+    color: red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+td {
+    border: 1px solid black;
+    height: 40px;
+    text-align: center;
+}
+
+ol {
+    max-width: fit-content;
+    text-decoration: underline;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+    list-style-position: inside;
+}
+
+ol li {
+    background-color: yellow;
+    width: fit-content;
+}
