@@ -1,0 +1,37 @@
+body {
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+h1 {
+    text-align: center;
+    color: rgb(157, 99, 184);
+    font-size: 16px;
+    font-weight: bold;
+}
+h2 {
+    text-align: center;
+    font-size: 16px;
+}
+p {
+    text-align: justify;
+}
+.content {
+    max-width: 650px;
+    margin: auto;
+}
+.p1::first-line {
+    background-color: #ff66ff;
+    font-weight: bold;
+}
+.p2::first-line {
+    background-color: red;
+    font-weight: bold;
+}
+.p3::first-line {
+    background-color: #00ff2a;
+}
+.p4::first-line {
+    background-color: #0033cc;
+    color: white;
+    font-weight: bold;
+}
