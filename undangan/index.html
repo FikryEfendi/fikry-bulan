@@ -1549,6 +1549,10 @@ function saveEdits() {
   msg.style.display = 'block';
   setTimeout(() => msg.style.display = 'none', 3000);
 }
+function toggleMobileMenu() {
+    const nav = document.querySelector('.nav');
+    nav.classList.toggle('mobile-active');
+}
 </script>
 
 </body>
