@@ -748,9 +748,10 @@ body::before {
 
   .ucapan-list { max-height: 280px; }
 
-  /* Mobile timeline: semua ke kiri */
-  .timeline::before { left: 16px; }
-  .timeline-item { flex-direction: row !important; gap: 14px; }
-  .timeline-content { text-align: left !important; }
-  .timeline-dot { flex-shrink: 0; }
+  /* Mobile timeline: garis & dot sinkron */
+  .timeline::before { left: 20px; transform: none; }
+  .timeline-item { flex-direction: row !important; align-items: flex-start; gap: 0; margin-bottom: 24px; }
+  .timeline-spacer { display: none !important; }
+  .timeline-dot { flex-shrink: 0; order: 1; margin: 4px 16px 0 14px; }
+  .timeline-content { text-align: left !important; order: 2; flex: 1; }
 }
