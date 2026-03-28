@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Undangan Fikry & Bulan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<!-- ─── LOGIN OVERLAY ─── -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div style="font-size:40px;margin-bottom:12px;">💍</div>
+    <h2>Dashboard</h2>
+    <p>Masukkan kata sandi untuk akses dashboard pengelola undangan</p>
+    <input type="password" class="login-input" id="loginPass" placeholder="Password">
+    <p class="error-msg" id="loginErr">❌ Password salah. Coba lagi.</p>
+    <button class="btn-gold" style="width:100%;margin-top:4px;" onclick="doLogin()">Masuk →</button>
+    <p style="margin-top:14px;font-size:12px;color:var(--text-light);">
+      <a href="undangan.html" style="color:var(--text-light);">✕ Batal</a>
+    </p>
+  </div>
+</div>
+
+<!-- ─── DASHBOARD WRAP ─── -->
+<div class="dashboard-wrap" id="dashboardWrap">
+
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+      <h1>Wedding Dashboard</h1>
+    </div>
+    <div class="dash-nav">
+      <button onclick="showDashTab('overview')" class="active" id="btn-overview">Overview</button>
+      <button onclick="showDashTab('edit')" id="btn-edit">Edit Undangan</button>
+      <button onclick="showDashTab('tamu')" id="btn-tamu">Data Tamu</button>
+      <button onclick="showDashTab('link')" id="btn-link">Generator Link</button>
+      <button class="btn-close" onclick="window.location.href='undangan.html'">✕ Tutup</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR OVERLAY (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <div class="dashboard-body">
+
+    <!-- SIDEBAR -->
+    <nav class="dash-sidebar" id="dashSidebar">
+      <a href="#" class="active" id="side-overview" onclick="showDashTab('overview');return false;"><span class="menu-icon">📊</span> Overview</a>
+      <a href="#" id="side-edit" onclick="showDashTab('edit');return false;"><span class="menu-icon">✏️</span> Edit Undangan</a>
+      <a href="#" id="side-tamu" onclick="showDashTab('tamu');return false;"><span class="menu-icon">👥</span> Data Tamu</a>
+      <a href="#" id="side-link" onclick="showDashTab('link');return false;"><span class="menu-icon">🔗</span> Generator Link</a>
+      <a href="undangan.html" style="margin-top:12px;color:#c0392b;"><span class="menu-icon">🔙</span> Kembali</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="dash-content">
+
+      <!-- ══ TAB: OVERVIEW ══ -->
+      <div id="tab-overview">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-num" id="stat-total">0</div>
+            <div class="stat-lbl">Total Undangan</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-hadir" style="color:var(--gold);">0</div>
+            <div class="stat-lbl">Konfirmasi Hadir</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-tidak" style="color:var(--rose);">1</div>
+            <div class="stat-lbl">Tidak Hadir</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-pending" style="color:var(--brown-light);">0</div>
+            <div class="stat-lbl">Belum Konfirmasi</div>
+          </div>
+        </div>
+
+        <div class="dash-panel">
+          <h3>⏳ Hitung Mundur</h3>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,28px);color:var(--brown);" id="dash-countdown">— hari menuju hari H</p>
+          <p style="font-size:13px;color:var(--text-light);margin-top:6px;">Sabtu, 14 Februari 2027 | Universitas Riau, Pekanbaru</p>
+        </div>
+
+        <div class="dash-panel">
+          <h3>📋 Checklist Persiapan</h3>
+          <div id="checklist"></div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: EDIT UNDANGAN ══ -->
+      <div id="tab-edit" style="display:none;">
+        <div class="dash-panel">
+          <h3>✏️ Edit Data Mempelai</h3>
+          <div class="edit-row">
+            <div>
+              <div class="edit-field">
+                <label>Nama Pria</label>
+                <input type="text" id="e-namaPria" value="Muhammad Fikry Efendi">
+              </div>
+              <div class="edit-field">
+                <label>Putra dari</label>
+                <input type="text" id="e-ortuPria" value="Bapak Harry & Ibu Ginny">
+              </div>
+            </div>
+            <div>
+              <div class="edit-field">
+                <label>Nama Wanita</label>
+                <input type="text" id="e-namaWanita" value="Bulan Hijarati A">
+              </div>
+              <div class="edit-field">
+                <label>Putri dari</label>
+                <input type="text" id="e-ortuWanita" value="Bapak Ron & Ibu Hermione">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-panel">
+          <h3>📅 Edit Waktu & Lokasi</h3>
+          <div class="edit-row">
+            <div>
+              <div class="edit-field">
+                <label>Tanggal Akad</label>
+                <input type="text" id="e-tanggal" value="Sabtu, 14 Februari 2027">
+              </div>
+              <div class="edit-field">
+                <label>Jam Akad</label>
+                <input type="text" id="e-akad" value="08:00 WIB">
+              </div>
+            </div>
+            <div>
+              <div class="edit-field">
+                <label>Jam Resepsi</label>
+                <input type="text" id="e-resepsi" value="11:00 WIB - Selesai">
+              </div>
+              <div class="edit-field">
+                <label>Dress Code</label>
+                <input type="text" id="e-dresscode" value="Pastel — Nude — Earthy Tone">
+              </div>
+            </div>
+          </div>
+          <div class="edit-field">
+            <label>Alamat Lokasi</label>
+            <textarea id="e-lokasi">Universitas Riau, Kampus Bina Widya, Jl. Bangau Sakti KM. 12,5, Simpang Baru, Kec. Tampan, Kota Pekanbaru, Riau 28293</textarea>
+          </div>
+        </div>
+
+        <div class="dash-panel">
+          <h3>👤 Nama Tamu Undangan</h3>
+          <div class="edit-field">
+            <label>Nama Tamu (Statis)</label>
+            <input type="text" id="e-namaTamu" value="Farhan" placeholder="Nama tamu untuk link statis">
+          </div>
+          <button class="btn-gold" onclick="saveEdits()">💾 Simpan Perubahan</button>
+          <p id="saveMsg" style="display:none;color:var(--gold-dark);margin-top:12px;font-size:14px;font-style:italic;">✓ Perubahan berhasil disimpan!</p>
+        </div>
+      </div>
+
+      <!-- ══ TAB: DATA TAMU (Ucapan Masuk) ══ -->
+      <div id="tab-tamu" style="display:none;">
+        <div class="dash-panel">
+          <h3 style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span>👥 Daftar Tamu & Ucapan</span>
+            <button class="btn-gold" style="padding:7px 18px;font-size:11px;" onclick="exportCSV()">⬇ Export CSV</button>
+          </h3>
+          <div style="overflow-x:auto;">
+            <table class="tamu-table" id="tamuTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nama</th>
+                  <th>Pesan</th>
+                  <th>Kehadiran</th>
+                  <th>Waktu</th>
+                </tr>
+              </thead>
+              <tbody id="tamuBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ TAB: GENERATOR LINK ══ -->
+      <div id="tab-link" style="display:none;">
+        <div class="dash-panel">
+          <h3>🔗 Generator Link Per Tamu</h3>
+          <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">
+            Setiap tamu mendapat link undangan unik yang otomatis menampilkan namanya. Bagikan via WhatsApp atau media sosial.
+          </p>
+
+          <!-- Tambah tamu -->
+          <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+            <input type="text" id="namaTamuBaru" placeholder="Nama tamu baru..."
+              style="flex:1;min-width:200px;padding:10px 14px;border:1px solid rgba(201,169,110,0.35);border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;outline:none;"
+              onkeydown="if(event.key==='Enter')tambahTamu()">
+            <button class="btn-gold" onclick="tambahTamu()">+ Tambah</button>
+          </div>
+
+          <!-- Tabel link -->
+          <div style="overflow-x:auto;">
+            <table class="tamu-table">
+              <thead>
+                <tr>
+                  <th>Nama Tamu</th>
+                  <th>Link Undangan</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="linkTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="generator-wrap" style="margin-top:20px;">
+            <p>💡 <strong>Format link:</strong> <code style="font-size:12px;">undangan.html?tamu=NamaTamu</code></p>
+            <p style="margin-top:6px;">Nama tamu akan otomatis muncul di bagian cover dan pengantar undangan.</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /dash-content -->
+  </div><!-- /dashboard-body -->
+</div><!-- /dashboard-wrap -->
+
+<script src="dashboard.js"></script>
+</body>
+</html>
